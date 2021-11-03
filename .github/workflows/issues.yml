@@ -1,0 +1,28 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Weekly Team Sync
+on:
+  schedule:
+    - cron: * 17 * * WED
+
+jobs:
+  create_issue:
+    name: Create standup issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Create standup issue
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          assignees: "callummole"
+          title: "Standup ${{ steps.data.outputs.today }}"
+          body: "Please add any updates you think are useful for other REG synthetic data projects to know about."
+                  
+          pinned: false
+          close-previous: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
