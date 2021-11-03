@@ -6,23 +6,22 @@
 name: Weekly Team Sync
 on:
   schedule:
-    - cron: '5 17 * * 3'
+    - cron: '0 9 * * 1'
+
 
 jobs:
   create_issue:
-    name: Create standup issue
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
-      - name: Create standup issue
-        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+      - name: Get today's date
+        id: date
+        run: |
+          echo "::set-output name=today::$(date "+%Y/%m/%d")"
+
+      - name: Create an issue
+        uses: actions-ecosystem/action-create-issue@v1
         with:
-          assignees: "callummole"
-          title: "Standup ${{ steps.data.outputs.today }}"
-          body: "Please add any updates you think are useful for other REG synthetic data projects to know about."
-                  
-          pinned: false
-          close-previous: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.github_token }}
+          title: Weekly Standup ${{ steps.date.outputs.today }}
+          body: Please post any useful updates from your project
+          assignees: "triangle-man, crangelsmith, callummole"
