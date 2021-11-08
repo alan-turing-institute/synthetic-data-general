@@ -6,7 +6,7 @@
 name: Weekly Team Sync
 on:
   schedule:
-    - cron: '0 9 * * 1'
+    - cron: '30 10 * * 1'
 
 
 jobs:
@@ -24,4 +24,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           title: Weekly Standup ${{ steps.date.outputs.today }}
           body: Please post any useful updates from your project
-          assignees: "triangle-man, crangelsmith, callummole"
+          assignees: |
+            triangle-man
+            crangelsmith
+            callummole
