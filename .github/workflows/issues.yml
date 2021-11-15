@@ -16,7 +16,7 @@ jobs:
       - name: Get today's date
         id: date
         run: |
-          echo "::set-output name=today::$(date "+%Y/%m/%d")"
+          echo "::set-output name=today::$(date "+%Y-%m-%d")"
 
       - name: Create an issue
         uses: actions-ecosystem/action-create-issue@v1
