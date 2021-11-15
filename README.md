@@ -21,3 +21,10 @@ Repo:  https://github.com/alan-turing-institute/synData-ONS
 Hut 23 issue: https://github.com/alan-turing-institute/Hut23/issues/1013
 
 Repo: https://github.com/alan-turing-institute/synthetic-data-federated-learning
+
+
+### Widening access to UCLH patient records using data synthesis
+
+Hut 23 issue: https://github.com/alan-turing-institute/Hut23/issues/957
+
+Project due to start 1 January 2022.
