@@ -4,9 +4,9 @@
 
 ## Description
 
-The QUiPP software is a pipeline for generating synthetic tabular data, that uses a variety of methods as implemented by several libraries. QUiPP also provides measures of privacy and utility of the resulting data in a variety of contexts. Whilst the synthetic data generation methods come from external libraries, the privacy and utility metrics have been chosen and implemented by the QUiPP team. 
+The QUiPP software is a pipeline for generating synthetic tabular data. QUiPP uses a variety of methods as implemented by several libraries and provides measures of privacy and utility on the resulting data. Whilst the synthetic data generation methods come from external libraries, the privacy and utility metrics have been chosen and implemented by the QUiPP team. 
 
-QUiPP is a makefile-based reproducible pipeline. The pipeline is highly configurable with input json files, which tells the pipeline which dataset to use, synthetic methods to run (as well as providing configuration intrinsic to each method), and then subsequently which privacy and utility metrics to calculate.
+QUiPP is a makefile-based reproducible pipeline. The pipeline is highly configurable with input json files, that tells the pipeline which dataset to use, synthetic methods to run (as well as providing configuration intrinsic to each method), and then subsequently which privacy and utility metrics to calculate.
 
 The input data is present as two files: a csv file which must contain column headings (along with the column data itself), and a json file describing the types of the columns used for synthesis.
 
@@ -78,7 +78,12 @@ Relevant directories for running QUiPP:
 ### CTGAN
 
 
-[CTGAN](https://pypi.org/project/ctgan/) is a library that implements the GAN-based Deep Learning data synthesizer for table data which was presented at the NeurIPS 2020 conference by the paper titled [Modeling Tabular data using Conditional GAN](https://arxiv.org/abs/1907.00503).
+[CTGAN](https://pypi.org/project/ctgan/) is a library that implements a synthesiser based on generative adversarial networks (GANs) for table data which was presented at the NeurIPS 2020 conference by the paper titled [Modeling Tabular data using Conditional GAN](https://arxiv.org/abs/1907.00503).
+
+In the paper, the authors found that modeling tabular data poses unique challenges for GANs, causing them to fall short
+of other baseline methods. These challenges include the need to simultaneously model discrete and continuous columns, the multi-modal non-Gaussian values within each continuous
+column, and the severe imbalance of categorical columns .
+To address these challenges, the conditional tabular GAN (CTGAN) method is proposed, which introduces several new techniques: augmenting the training procedure with mode-specific normalization, architectural changes, and addressing data imbalance by employing a conditional generator and training-by-sampling (details of what this means can be found in the paper).
 
 In order to use CTGAN, the input data must be in either a numpy.ndarray or a pandas.DataFrame object with two types of columns:
 
@@ -101,93 +106,37 @@ attribute is categorical or continious, but is my understanding that the methods
 
 ## Synthpop 
 
+> Still a placeholder
 
 [Synthpop](https://CRAN.R-project.org/package=synthpop) is an R package for producing synthetic
-microdata using sequential modelling.
+microdata using sequential modelling. 
 
 See also the [accompanying paper](https://www.jstatsoft.org/article/view/v074i11).
 
+[Using CART to Generate Partially Synthetic, Public Use Microdata] (https://nces.ed.gov/FCSM/pdf/2003FCSM_Reiter.pdf)
+
 
 ### SGF
+> Still a placeholder
 
 https://vbinds.ch/sites/default/files/PDFs/VLDB17-Bindschaedler-Plausible.pdf
 
 ### Baseline methods
 
+> Stil la placeholder
 
-## Metrics implemented
+## Assesment metrics implemented
 
 ### Privacy 
 
-- discloure risk
-- leaky output -> calculates disclosure risk 
+> Still a placeholder
+
+- Disclosure risk
 
 ### Utility
 
+> Still a placeholder
 
-## Reflections on what is next
+## What is next for QUiPP
 
-- Two main streams of work.
-- Needs a tutorial (something similar to the census)
-- Needs a new harmonisation branch.
-- Membership inference attacks
-
-# Random notes for the moment
-## Main branches
-
-- census 2011 microdata
-    - notebooks with evaluation of the census microdata
-- develop-paper 
-    - implementation of another utility metric
-
-
-
-## Notes
-
-- Lots of placeholders...
-- Toy datasets with no clear evaluation
-- In clear need of some cleaning. 
-- Census dataset seems to be best documented as for a case study.
-
-- Develop paper -> has some more implementations of utilities.
-- k = 1 -> priv bayes
-
-## Ideas for a tutorial
-
-Based on these notebooks:
-- [Data Generation with Census 2011](https://github.com/alan-turing-institute/QUIPP-pipeline/blob/2011-census-microdata/examples/2011-census-microdata/Census%202011%20Microdata%20-%20Synthetic%20Data%20Generation%20with%20QUIPP.ipynb)
-- [Census 2011 Synthetic datasets comparison](https://github.com/alan-turing-institute/QUIPP-pipeline/blob/2011-census-microdata/examples/2011-census-microdata/Synthetic%20datasets%20comparison.ipynb)
-
-### Outline
-
-- How to create the datasets (for all avalaible methods)
-- Information of time to run each method.
-- Comparison of distributions
-- Exposure of metrics.
-- 
-## Links
-
-- [Synthpop library](https://rdrr.io/cran/synthpop/)
-- [Inference from fitted models in synthpop](https://rdrr.io/cran/synthpop/f/inst/doc/inference.pdf)
-- [Notes from Callum about QUIPP](https://hackmd.io/tpy3YfaARPWYLA7Rle_5yQ)
-
-
-## Develop paper
-
-- Main contributions from this branch that can be rescued to a generic develop branch:
-    - Feature importance utility metric
-        - With example json files of how to run it.
-    - Updates in synth data generation methods  
-        - Updates to privbayes
-        - All the changes to CTGAN
-        - New baselines (bootstrap, resampling, etc).
-- Other contribution with lower priority but that could be very useful.
-    -  New datasets and json files of how to run them
-        -  Note: Framingham dataset was not approved on EAG, might still be in the reepo but mus be removed.
-    -  Infrastructure to run pipeline in Azure 
-     
-- Contributions that are very linked to the paper (and probably not generalisable for a new user)
-    - Script that generate input files and runs make for experiments
-        - Different privacy values
-        - Different baselines (independent column resampling sampling, subsampling).
-    - Make file is very based on the needs for the paper 
+> Still a placeholder
