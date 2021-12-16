@@ -20,7 +20,7 @@ The following figure indicates the full pipeline, as run on an input file called
 
 The file-base desing of the pipeline makes it very costumisable, allowing it run in any dataset (as long its format and variable types are properly described on the dataset json file) and any configuration of avalaible methods and assessment metrics. 
 
-The kind of data format and types that can be synthesised do not depend on the QUiPP pipeline, but the synthesis method to use. 
+The data format and types that can be synthesised do not depend on the QUiPP pipeline, but the synthesis method to use. 
 
 Furthermore, this design makes the QUiPP extensible. For example, to add a new synthetic data method you just need a new folder with the method name, and a file named `run` (which is typically a python wrapper that picks up the values from the input json and passes them to a python script housing the method). 
 
@@ -95,7 +95,7 @@ In order to use CTGAN, the input data must be in either a numpy.ndarray or a pan
 
 
 Given a dataset *D*, PrivBayes first constructs a Bayesian network *N* , which (i) provides a succinct model of the correlations among the attributes in *D* and (ii) allows us to approximate the distribution of data in *D* using a set *P* of low-dimensional marginals of *D*. After that, PrivBayes injects noise into each marginal in *P* to ensure differential privacy and then uses the noisy marginals and the Bayesian network to construct an approximation of the data distribution in *D*. Finally, PrivBayes samples
-tuples from the approximate distribution to construct a synthetic dataset (description taken from the paper: [PrivBayes: Private Data Release via Bayesian Networks](https://dl.acm.org/doi/10.1145/3134428)). 
+tuples from the approximate distribution to construct a synthetic dataset (description taken from the paper [PrivBayes: Private Data Release via Bayesian Networks](https://dl.acm.org/doi/10.1145/3134428)). 
 
 QUiPP uses the PrivBayes implementation within the DataSynthesizer fork found [here](https://github.com/gmingas/DataSynthesizer). in here DataSynthesizer learns a diferentially private Bayesian network capturing the correlation structure between attributes, then draw samples from this model to construct the result dataset. 
 
@@ -111,9 +111,7 @@ attribute is categorical or continious, but is my understanding that the methods
 [Synthpop](https://CRAN.R-project.org/package=synthpop) is an R package for producing synthetic
 microdata using sequential modelling. 
 
-See also the [accompanying paper](https://www.jstatsoft.org/article/view/v074i11).
-
-[Using CART to Generate Partially Synthetic, Public Use Microdata] (https://nces.ed.gov/FCSM/pdf/2003FCSM_Reiter.pdf)
+See also the [accompanying paper](https://www.jstatsoft.org/article/view/v074i11). And [using CART to Generate Partially Synthetic, Public Use Microdata](https://nces.ed.gov/FCSM/pdf/2003FCSM_Reiter.pdf)
 
 
 ### SGF
@@ -135,7 +133,34 @@ https://vbinds.ch/sites/default/files/PDFs/VLDB17-Bindschaedler-Plausible.pdf
 
 ### Utility
 
-> Still a placeholder
+### Classifier metrics
+
+Calculates the performance of different machine learning classifiers trained on the original and released datasets for a specified target variable and then tested on the original. These values are then compared to estimate the utility of the released dataset. Results are saved to .json files and an html report is generated.
+
+
+### Correlation metrics
+
+A number of correlation-like utility metrics are calculated for all combinations of columns of the original and released dataset. Results are saved into a  .json file. These can be compared to estimate the utility of the released dataset. 
+
+Metrics are the implementation from the [dyton library](http://shakedzy.xyz/dython/) of the following correlations:
+
+- Cramers_v
+- theils_u
+- correlation_ratio
+
+
+### Feature importance
+
+The feature importance ranking differences between the original and released datasets is calculated, using a random forest classification model, various feature importance measures and various feature rank/score comparison measures.
+The results are saved into a .json file. These can be compared to estimate the utility of the released dataset.
+
+Some of the rank comparison metrics implemented are the following:
+
+- Ranked-biased Overlap 
+- Correlated rank similarity metrics
+- L2 norm 
+- KL divergence
+
 
 ## What is next for QUiPP
 
