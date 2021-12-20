@@ -106,12 +106,15 @@ attribute is categorical or continious, but is my understanding that the methods
 
 ## Synthpop 
 
-> Still a placeholder
-
 [Synthpop](https://CRAN.R-project.org/package=synthpop) is an R package for producing synthetic
 microdata using sequential modelling. 
 
-See also the [accompanying paper](https://www.jstatsoft.org/article/view/v074i11). And [using CART to Generate Partially Synthetic, Public Use Microdata](https://nces.ed.gov/FCSM/pdf/2003FCSM_Reiter.pdf)
+The synthesizing methods can be parametric and non-parametric. The latter are based on
+classification and regression trees (CART) that can handle any type of data. The parametric methods. The 
+parametric methods can handle numeric, binary, unordered factor and ordered factor data types. The methods
+currently implemented and data types that they accept are listed in [Table 1 of its accompanying paper](https://www.jstatsoft.org/article/view/v074i11).
+
+QUiPP input json file allows for specification of the type of synthesis to be used within Synthopop and the order in which the columns are synthesised.
 
 
 ### SGF
@@ -127,18 +130,25 @@ https://vbinds.ch/sites/default/files/PDFs/VLDB17-Bindschaedler-Plausible.pdf
 
 ### Privacy 
 
-> Still a placeholder
+#### Disclosure risk
 
-- Disclosure risk
+The disclosure risk can be defined as the risk that an intruder can access samples from the originial dataset  to identify information on an individual on the release dataset. 
+
+Calculating disclosure risks can be relevant when producing partial synthetic datasets, where some columns remain unchanged. QUiPP calculates a number of metrics, such as     `EMRi`,`TMRi`,` TMRi`, `TMRa`,`TMRa`,`EMRi_norm`,`EMRi_norm`, `TMRi_norm`.
+
+>TODO: Understand how these metrics are calculated.
+
+
+
 
 ### Utility
 
-### Classifier metrics
+#### Classifier metrics
 
 Calculates the performance of different machine learning classifiers trained on the original and released datasets for a specified target variable and then tested on the original. These values are then compared to estimate the utility of the released dataset. Results are saved to .json files and an html report is generated.
 
 
-### Correlation metrics
+#### Correlation metrics
 
 A number of correlation-like utility metrics are calculated for all combinations of columns of the original and released dataset. Results are saved into a  .json file. These can be compared to estimate the utility of the released dataset. 
 
@@ -149,7 +159,7 @@ Metrics are the implementation from the [dyton library](http://shakedzy.xyz/dyth
 - correlation_ratio
 
 
-### Feature importance
+#### Feature importance
 
 The feature importance ranking differences between the original and released datasets is calculated, using a random forest classification model, various feature importance measures and various feature rank/score comparison measures.
 The results are saved into a .json file. These can be compared to estimate the utility of the released dataset.
