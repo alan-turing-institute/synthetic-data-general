@@ -23,8 +23,10 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           title: Weekly Standup ${{ steps.date.outputs.today }}
-          body: Please post any useful updates from your project
+          body: Please post any useful updates from your project and agenda items you wish to discuss in our weekly Tuesday meeting.
           assignees: |
             triangle-man
             crangelsmith
             callummole
+            myyong
+            Iain-S
