@@ -26,6 +26,25 @@ Furthermore, this design makes the QUiPP extensible. For example, to add a new s
 
 Finally, QUiPP can also generate toy datasets that can be used in the pipeline. This is not part of the main functionality of the pipeline, but can be used for experimentation and was useful in the early days of the development of the software.
 
+The table below summarises all methods (synthetic data generation, utility and privacy estimations) avalaible in QUiPP and provides details on their implementation.
+
+
+| Method | Data | QUiPP implementation | Comments |
+| -------- | -------- | -------- |-------- |
+|  **Generation**                     ||||
+| CTGAN     | Tabular data which can contain continuous, and discrete values.     | Uses [CTGAN library](https://pypi.org/project/ctgan/).      |   Seems to work with most/all example datasets from QUiPP.      |
+| PrivBayes     | Tabular data with four data types: integer, float, datetime and strings.     | Uses [DataSynthesizer](https://github.com/gmingas/DataSynthesizer) library.     |  Uses a DataSynthesizer fork, which has been modified by the QUiPP team. Seems to work with most/all example datasets from QUiPP.         |
+| Synthpop     | Any data type, according to [Table 1 of its accompanying paper](https://www.jstatsoft.org/article/view/v074i11).      | Uses the [Synthpop](https://CRAN.R-project.org/package=synthpop) R package, particularly the CART method.     |    The pipeline can only use the Polish data set embedded in the synthpop package or the ONS Census data set available in QUiPP.      |
+| SGF     | Only supports discrete variables     | Uses the [Synthetic Data Generation Framework](https://vbinds.ch/node/69) | Only works for dummy A&E generated dataset         |
+| Baselines     | -     | Implemented within QUiPP     |      Sampling from original dataset with and without replacement   |
+|  **Utility**                     ||||
+| Classifier metrics     |   Target variable must be binary categorical data.   | Implemented within QUiPP     |  Compares ML classifier performance metrics for the original and released datasets on a given target variable (LogisticRegression, KNeighborsClassifier,SVC, RandomForestClassifier, etc. from [sklearn](https://scikit-learn.org/stable/)).      |
+| Correlation metrics     | Categorical    |  Implemented within QUiPP     |    Cramer's V and Thiel's U for categorical-categorical combinations of  columns and correlation ratios from [dython library](http://shakedzy.xyz/dython/). | Implemented in QUiPP   |         |
+| Feature importance     | Categorical, numerical, ordinal.    | Implemented within QUiPP (this was part of the research done within the project)      |       Calculates differences on feature importance ranking between original and released datasets, using a random forest classification model, various feature importance measures and various feature rank/score comparison measures.  |
+|  **Privacy**                     ||||
+| Disclosure risk     | -    | Implemented within QUiPP      |  Only works with partially generated data (inspired on this [paper](http://www2.stat.duke.edu/~jerry/Papers/PSD08.pdf)).       |
+
+
 ## How to use
 
 The installation instructions are found in the [README](https://github.com/alan-turing-institute/QUIPP-pipeline#local-installation) of the repo.
