@@ -1,6 +1,6 @@
 # What is QUIPP
 
-> These notes are a mixture of documentation from QUiPP, discussions with members of the team, extracts from papers, reflections from Camila and [notes](https://hackmd.io/tpy3YfaARPWYLA7Rle_5yQ) written by Callum.
+> These notes are a mixture of documentation from QUiPP, discussions with members of the team, extracts from papers, reflections from Camila and notes written by Callum.
 
 ## Description
 
