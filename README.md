@@ -28,3 +28,7 @@ Repo: https://github.com/alan-turing-institute/synthetic-data-federated-learning
 Hut 23 issue: https://github.com/alan-turing-institute/Hut23/issues/957
 
 Project due to start 1 January 2022.
+
+### Synthetic data privacy toolbox
+
+https://github.com/alan-turing-institute/privacy-sdg-toolbox
